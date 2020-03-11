@@ -20,7 +20,13 @@ async def on_ready():
 @bot.command()
 async def hello(ctx):
     """Says a response"""
-    await ctx.send("woof")
+    woof=random.choice(["woof", "bark", "*whines happily*", "*wags tail*", "*wags whole butt out of excitement*", "*starts trying to lick you while still 3 feet away*"])
+    resp = '{response}'.format(response= woof)
+    print('hello')
+    print(resp)
+    print('-----')
+    await ctx.send(resp)
+
 
 @bot.command()
 async def roll(ctx, dice: str):
@@ -32,6 +38,23 @@ async def roll(ctx, dice: str):
         return
 
     result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
+    print('roll')
+    print(dice)
+    print(rolls)
+    print('-----')
     await ctx.send(result)
+
+@bot.command()
+async def guess(ctx, g : int):
+    """Guess a number between 1 and 5"""
+    num = random.randint(1, 5)
+    if g == num:
+        print ('Guess = Correct')
+        print ('-----')
+        await ctx.send('Correct!')
+    else:
+        print ('Guess = Wrong. Num is ', num)
+        print ('-----')
+        await ctx.send("I'm sorry, that is incorrect.")
 
 bot.run(TOKEN)
